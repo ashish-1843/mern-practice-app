@@ -34,11 +34,11 @@ const Dashboard = () => {
               </p>
 
               <div className="flex gap-2 items-center justify-center">
-                <Button onClick={() => navigate('/create-todo')} size="lg" className="h-12 px-8  py-8 relative bg-green-600 hover:bg-green-500">
+                <Button onClick={() => navigate('/create-note')} size="lg" className="h-12 px-8  py-8 relative bg-green-600 hover:bg-green-500 cursor-pointer">
                   Start Taking Notes
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
-                <Button variant="outline" size="lg" className="h-12 px-8 bg-white text-green-800">
+                <Button variant="outline" size="lg" className="h-12 px-8 bg-white text-green-800 cursor-pointer">
                   Watch Demo
                 </Button>
               </div>

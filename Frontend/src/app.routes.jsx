@@ -26,7 +26,7 @@ export const router = createBrowserRouter([
         element: <VerifyEmail/>
     },
     {
-        path: '/create-todo',
+        path: '/create-note',
         element: <Protected><Navbar/><CreateToDo/></Protected>
     }
 ])

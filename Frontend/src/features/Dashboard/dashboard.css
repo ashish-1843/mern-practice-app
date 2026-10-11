@@ -1,18 +1,71 @@
-
-
-Button{
+Button {
     margin-top: 10px;
     padding-inline: 20px;
 }
 
-p{
+p {
     margin-top: 20px;
 }
 
-nav{
+nav {
     padding-inline: 10px;
     padding-block: 8px;
 }
 
+.note-card {
+    color: black;
+    padding-inline: 10px;
 
+    h2 {
+        font-size: 1.5rem;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
 
+    h3 {
+        font-size: 1.2rem;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    p {
+        margin-top: 5px;
+        color: whitesmoke;
+
+    }
+}
+
+.note-list {
+    display: flex;
+    gap: 2rem;
+
+    li {
+        background-color: #635e5ec4;
+        padding: 10px;
+        margin: 10px 0;
+        border-radius: 5px;
+    }
+    hr{
+        margin-top: 8px;
+        height: 1px;
+        border-top-width: 2px;
+        color: grey
+    }
+}
+
+.note-btn{
+    display: flex;
+    justify-content: space-between;
+
+    Button{
+        padding: 0;
+        margin: 0;
+        color: white;
+        cursor: pointer;
+        font-size: 10rem;
+    }
+
+    Button:hover{
+        color: rgba(255, 255, 255, 0.384);
+    }
+}
