@@ -41,7 +41,7 @@ const Register = () => {
     return (
         <main>
             <div className='form-container'>
-                <h1>Register</h1>
+                <h1 className='text-green-600'>Register</h1>
 
                 <div className='input-group'>
                     <label htmlFor='username'>Username</label>
@@ -75,7 +75,7 @@ const Register = () => {
 
                 </div>
 
-                <button onClick={handleSubmit} className='btn primary-btn' type="submit">
+                <button onClick={handleSubmit} className='btn primary-btn bg-green-500' type="submit">
                     {isLoading ? "Creating.." : "Register"}
                 </button>
 

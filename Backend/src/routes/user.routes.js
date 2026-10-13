@@ -26,4 +26,12 @@ userRouter.get('/get-notes', authMiddleware.authUser, userController.getNotes);
 
 userRouter.put('/update-note/:noteId', authMiddleware.authUser, userController.updateNote);
 
+/**
+ * @route /api/user/delete-note/:noteId
+ * @description Delete a note for the authenticated user
+ * @access Private      
+ */
+
+userRouter.delete('/delete-note/:noteId', authMiddleware.authUser, userController.deleteNote);
+
 module.exports = userRouter;

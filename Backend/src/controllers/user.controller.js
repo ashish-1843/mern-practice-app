@@ -64,7 +64,7 @@ const updateNote = async (req, res) => {
                     "Note not found."
             })
         }
-    
+
         note.title = title;
         note.description = description;
         const updateNote = await note.save();
@@ -73,7 +73,7 @@ const updateNote = async (req, res) => {
             message: "Note updated successfully.",
             note: updateNote
         });
-    } catch(err){
+    } catch (err) {
         return res.status(500).json({
             message: "Error updating note.",
             error: err
@@ -81,4 +81,33 @@ const updateNote = async (req, res) => {
     }
 }
 
-module.exports = { createNote, getNotes, updateNote };
+/**
+ * @route /api/user/delete-note/:noteId
+ * @description Delete a note for the authenticated user
+ * @access Private          
+ */
+
+const deleteNote = async (req, res) => {
+    const { noteId } = req.params;
+
+    try {
+        const note = await noteModel.findOneAndDelete({ _id: noteId, user: req.user.id });
+
+        if (!note) {
+            return res.status(404).json({
+                message: "Note not found."
+            })
+        }
+
+        return res.status(200).json({
+            message: "Note deleted successfully."
+        });
+    } catch (err) {
+        return res.status(500).json({
+            message: "Error deleting note.",
+            error: err
+        })
+    }
+}
+
+module.exports = { createNote, getNotes, updateNote, deleteNote };

@@ -11,8 +11,7 @@
     transition: all 0.2s ease-in-out;
 
     &.primary-btn{
-        background-color: rgb(176, 38, 38);
-        color:whitesmoke;
+        color:white;
     }
 
     &:active{

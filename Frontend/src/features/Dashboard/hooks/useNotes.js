@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { NotesContext } from "../notes.context";
-import { createNote, getNotes, updateNote } from "../services/notes.api";
+import { createNote, getNotes, updateNote, deleteNote } from "../services/notes.api";
 import { useParams } from "react-router";
 
 
@@ -54,12 +54,26 @@ export const useNotes = () => {
         }
     }
 
+    const handleDeleteNote = async (noteId) =>{
+        setLoading(true);
+        try{
+            const data = await deleteNote(noteId);
+            setNotes((prevNotes) => prevNotes.filter((note) => note._id !== noteId));
+            return data;
+        } catch (err) {
+            throw err;
+        } finally {
+            setLoading(false);
+        }
+    }
+
     return {
         loading, 
         notes,
         handleCreateNote,
         handleGetNotes,
-        handleUpdateNote
+        handleUpdateNote,
+        handleDeleteNote
     }
 
 

@@ -44,7 +44,7 @@ const Login = () => {
     return (
         <main>
             <div className='form-container'>
-                <h1>Login</h1>
+                <h1 className='text-green-600'>Login</h1>
                 <div className='input-group'>
                     <label htmlFor='email'>Email</label>
                     <input
@@ -67,7 +67,7 @@ const Login = () => {
                     </button>
                 </div>
 
-                <button className='btn primary-btn' onClick={handleSubmit}>
+                <button className='btn primary-btn bg-green-500' onClick={handleSubmit}>
                     {isLoading ? "Logging into your account.." : "Login"}</button>
 
 

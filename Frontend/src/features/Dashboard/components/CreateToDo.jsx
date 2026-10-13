@@ -19,7 +19,7 @@ import { toast } from 'react-toastify'
 
 const CreateToDo = () => {
 
-  const { handleGetNotes, handleUpdateNote, handleCreateNote } = useNotes();
+  const { handleGetNotes, handleUpdateNote, handleCreateNote, handleDeleteNote } = useNotes();
   const [notes, setNotes] = useState([]);
   const [open, setOpen] = useState(false);
   const [selectedNote, setSelectedNote] = useState(null);
@@ -56,8 +56,8 @@ const CreateToDo = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-      try {
-        if(selectedNote){
+    try {
+      if (selectedNote) {
         await handleUpdateNote(noteID, {
           title,
           description,
@@ -66,16 +66,26 @@ const CreateToDo = () => {
         getNotes();
         setOpen(false);
         toast.success("Updated Successfully!")
-      }else{
-        await handleCreateNote({title, description})
+      } else {
+        await handleCreateNote({ title, description })
         getNotes();
         setOpen(false);
         toast.success("Note Created Successfully!")
       }
-      }
-      catch (err) {
-        toast.error(err.response?.data?.message); 
-    } 
+    }
+    catch (err) {
+      toast.error(err.response?.data?.message);
+    }
+  }
+
+  const deleteNote = async (id) => {
+    try {
+      await handleDeleteNote(id);
+      getNotes();
+      toast.success("Note Deleted Successfully!");
+    } catch (err) {
+      toast.error(err.response?.data?.message);
+    }
   }
 
 
@@ -83,7 +93,7 @@ const CreateToDo = () => {
   return (
     <>
       {
-        notes.length > 0 && (
+        notes.length > 0 ? (
           <section className='note-card'>
             <h2 className='text-green-600'>My Notes</h2>
             <ul className='note-list'>
@@ -96,17 +106,20 @@ const CreateToDo = () => {
                   <div className='note-btn'>
 
 
-                    <Button
+                    <button
                       type="button"
-                      onClick={() => handleEdit(note)}><Edit size="60" /></Button>
+                      onClick={() => handleEdit(note)}><Edit size={18} className='!mt-1' /></button>
 
-                    <Button><Delete size={20} /></Button>
+                    <button
+                      type="button"
+                      onClick={() => deleteNote(note._id)}
+                    ><Delete size={20} className='!mt-1'/></button>
                   </div>
                 </li>
               ))}
             </ul>
           </section>
-        )
+        ) : <p className='text-center text-green-600 font-bold'>NO DATA FOUND</p>
       }
 
       <Button
@@ -120,7 +133,7 @@ const CreateToDo = () => {
       <Dialog open={open} onOpenChange={setOpen}>
 
         <DialogContent className="w-[calc(100%-1rem)] max-w-lg rounded-2xl !p-6 border border-green-100 bg-gradient-to-br from-white via-green-50 to-emerald-50  text-slate-800 shadow-[0_25px_60px_-20px_rgba(22,163,74,0.45)] sm:rounded-3xl sm:p-7">
-          <form onSubmit={(e)=>
+          <form onSubmit={(e) =>
             handleSubmit(e)
           }>
             <DialogHeader className="space-y-2 px-1">
@@ -147,8 +160,8 @@ const CreateToDo = () => {
               </Field>
             </FieldGroup>
             <DialogFooter className="mt-4 mx-0 mb-0 border-t border-green-100 bg-transparent sm:justify-end sm:p-4">
-              <DialogClose render={<Button variant="outline" onClick={() => setOpen(false)} className="h-10 rounded-xl border-slate-200 bg-white text-slate-700 hover:bg-slate-50">Cancel</Button>} />
-              <Button type="submit" className="h-10 rounded-xl bg-green-600 text-white shadow-sm hover:bg-green-500">Save changes</Button>
+              <DialogClose render={<Button variant="outline" onClick={() => setOpen(false)} className="cursor-pointer h-10 rounded-xl border-slate-200 bg-white text-slate-700 hover:bg-slate-100">Cancel</Button>} />
+              <Button type="submit" className="cursor-pointer h-10 rounded-xl bg-green-600 text-white shadow-sm hover:bg-green-500">Save changes</Button>
             </DialogFooter>
           </form>
         </DialogContent>

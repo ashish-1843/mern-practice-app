@@ -44,11 +44,11 @@ const Navbar = () => {
                             user ?
                                 <DropdownMenu>
                                     <DropdownMenuTrigger>
-                                        <Avatar className='w-10'>
+                                        <Avatar className=''>
                                             <AvatarFallback>ON</AvatarFallback>
                                         </Avatar>
                                     </DropdownMenuTrigger>
-                                    <DropdownMenuContent className='w-30 h-30'>
+                                    <DropdownMenuContent className='w-35 h-30 !mt-3 !p-1'>
                                         <DropdownMenuGroup>
                                             <DropdownMenuLabel className='text-base'>My Account</DropdownMenuLabel>
                                             <DropdownMenuSeparator />
@@ -56,7 +56,7 @@ const Navbar = () => {
                                             <DropdownMenuItem className='text-base'><User />Profile</DropdownMenuItem>
                                             <DropdownMenuItem className='text-base'><BookA />Notes</DropdownMenuItem>
                                             <DropdownMenuSeparator />
-                                            <DropdownMenuItem className='text-base'
+                                            <DropdownMenuItem className='text-base cursor-pointer'
                                                 onClick={logout}
                                             ><LogOut />Logout</DropdownMenuItem>
                                         </DropdownMenuGroup>

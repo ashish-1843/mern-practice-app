@@ -11,11 +11,12 @@ main{
         padding-inline: 3rem;
         padding-block: 2rem;
         border-radius: 1rem;
-        background-color: rgb(3, 43, 96);
+        background-color: rgb(45, 46, 46);
         min-width: 400px;
         display:flex;
         flex-direction: column;
         gap: 0.75rem;
+
 
         h1{
             font-size: 30px;
