@@ -41,6 +41,10 @@ All endpoints are prefixed with `/api/auth`.
 | `POST` | `/refresh` | Public | Issue a new access token using the refresh-token cookie. |
 | `GET` | `/get-me` | Authenticated | Return the current user using the bearer access token. |
 | `GET` | `/logout` | Authenticated | Log out of the current session. |
+| `POST` | `/create-note` | Authenticated | Create a new note for the authenticated user. |
+| `GET` | `/get-notes` | Authenticated | Retrieve all notes for the authenticated user. |
+| `PUT` | `/update-note/:noteId` | Authenticated | Update a note for the authenticated user. |
+| `DELETE` | `/delete-note/:noteId` | Authenticated | Delete a note for the authenticated user. |
 
 The frontend sends requests with credentials enabled and attaches the access token as a bearer token. The refresh endpoint relies on the refresh-token cookie.
 

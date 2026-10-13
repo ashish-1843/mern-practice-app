@@ -12,7 +12,7 @@ const Dashboard = () => {
   const { user } = useAuth();
   const navigate = useNavigate();
   return (
-    <main className="relative w-full md:h-[800px] h-screen overflow-hidden">
+    <main className="relative w-full overflow-hidden">
       <div className='main-container py-12 md:py-24 lg:py-32 xl:py-48'>
         <div className=' max-w-3xl px-4 mx-auto md:px-6'>
           <div className=' flex flex-col items-center space-y-4 text-center'>

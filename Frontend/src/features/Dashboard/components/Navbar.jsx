@@ -43,8 +43,8 @@ const Navbar = () => {
                         {
                             user ?
                                 <DropdownMenu>
-                                    <DropdownMenuTrigger>
-                                        <Avatar className=''>
+                                    <DropdownMenuTrigger className='cursor-pointer !p-0 !m-0'>
+                                        <Avatar>
                                             <AvatarFallback>ON</AvatarFallback>
                                         </Avatar>
                                     </DropdownMenuTrigger>

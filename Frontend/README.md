@@ -52,6 +52,7 @@ Then open:
 | `/login` | Sign in | Public |
 | `/verify-email` | Enter the email verification code | Public |
 | `/dashboard` | Dashboard and navigation | Requires authentication |
+| `/dashboard/notes` | Notes management | Requires authentication |
 
 Authentication is managed through the auth context. The app sends the access token on requests, uses credentialed requests for the refresh-token cookie, and restores the saved session when the app loads.
 

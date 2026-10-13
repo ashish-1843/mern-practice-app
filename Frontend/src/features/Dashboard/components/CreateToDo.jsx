@@ -12,7 +12,7 @@ import { Field, FieldGroup } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Button } from '@/components/ui/button'
-import { Delete, Edit, Edit2, Plus } from 'lucide-react'
+import { Delete, Edit, Plus } from 'lucide-react'
 import { useNotes } from '../hooks/useNotes'
 import '../dashboard.css';
 import { toast } from 'react-toastify'
@@ -113,7 +113,7 @@ const CreateToDo = () => {
                     <button
                       type="button"
                       onClick={() => deleteNote(note._id)}
-                    ><Delete size={20} className='!mt-1'/></button>
+                    ><Delete size={20} className='!mt-1' /></button>
                   </div>
                 </li>
               ))}
