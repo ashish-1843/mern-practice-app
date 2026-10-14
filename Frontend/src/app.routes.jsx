@@ -10,6 +10,10 @@ import CreateToDo from './features/Dashboard/components/CreateToDo';
 
 export const router = createBrowserRouter([
     {
+        path: '/',
+        element: <Login/>
+    },
+    {
         path: '/register',
         element: <Register/>
     },

@@ -12,7 +12,7 @@ import { Field, FieldGroup } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Button } from '@/components/ui/button'
-import { Delete, Edit, Plus } from 'lucide-react'
+import { Delete, Edit, Plus, Search } from 'lucide-react'
 import { useNotes } from '../hooks/useNotes'
 import '../dashboard.css';
 import { toast } from 'react-toastify'
@@ -26,7 +26,14 @@ const CreateToDo = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [noteID, setNoteID] = useState("");
+  const [search, setSearch] = useState("");
 
+  const filteredNotes = notes.filter((note) => {
+    return (
+      (note.title || "").toLowerCase().includes(search.toLowerCase()) ||
+      (note.description || "").toLowerCase().includes(search.toLowerCase())
+    );
+  });
 
   const getNotes = async () => {
     const data = await handleGetNotes();
@@ -92,12 +99,18 @@ const CreateToDo = () => {
 
   return (
     <>
+      <input type='text'
+                placeholder='Search notes by title or description..'
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                className="w-2/5 absolute right-80 rounded-xl border border-green-200 bg-white !mt-2 !p-2 text-slate-800 outline-none transition focus:border-green-500 focus:ring-2 focus:ring-green-100 !bg-transparent text-white"
+              />
       {
-        notes.length > 0 ? (
+        filteredNotes.length > 0 ? (
           <section className='note-card'>
-            <h2 className='text-green-600'>My Notes</h2>
+              <h2 className='text-green-600'>My Notes</h2>
             <ul className='note-list'>
-              {notes.map((note, i) => (
+              {filteredNotes.map((note, i) => (
                 <li>
                   <h3 className='text-green-600'>{i + 1}. {note.title} </h3>
 
@@ -119,7 +132,7 @@ const CreateToDo = () => {
               ))}
             </ul>
           </section>
-        ) : <p className='text-center text-green-600 font-bold'>NO DATA FOUND</p>
+        ) : <p className='!mt-40 text-center text-green-600 font-bold'>{search.trim() ? 'No matching found' : "No data found"}</p>
       }
 
       <Button
@@ -167,6 +180,7 @@ const CreateToDo = () => {
         </DialogContent>
 
       </Dialog>
+      
     </>
   )
 }
