@@ -99,12 +99,14 @@ const CreateToDo = () => {
 
   return (
     <>
-      <input type='text'
+      <div className="note-search-container">
+        <input type='text'
                 placeholder='Search notes by title or description..'
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                className="w-2/5 absolute right-80 rounded-xl border border-green-200 bg-white !mt-2 !p-2 text-slate-800 outline-none transition focus:border-green-500 focus:ring-2 focus:ring-green-100 !bg-transparent text-white"
+                className="note-search rounded-xl border border-green-200 bg-white !p-2 text-slate-800 outline-none transition focus:border-green-500 focus:ring-2 focus:ring-green-100 !bg-transparent text-white"
               />
+      </div>
       {
         filteredNotes.length > 0 ? (
           <section className='note-card'>
@@ -117,8 +119,6 @@ const CreateToDo = () => {
                   <p>{note.description}</p>
                   <hr></hr>
                   <div className='note-btn'>
-
-
                     <button
                       type="button"
                       onClick={() => handleEdit(note)}><Edit size={18} className='!mt-1' /></button>
@@ -131,6 +131,7 @@ const CreateToDo = () => {
                 </li>
               ))}
             </ul>
+        
           </section>
         ) : <p className='!mt-40 text-center text-green-600 font-bold'>{search.trim() ? 'No matching found' : "No data found"}</p>
       }
@@ -138,7 +139,7 @@ const CreateToDo = () => {
       <Button
         type="button"
         onClick={handleCreate}
-        className=" cursor-pointer h-11 rounded-xl border-green-200 bg-white  text-green-700 shadow-sm transition hover:border-green-400 hover:bg-green-50 hover:text-green-800 absolute bottom-20 right-20"
+        className="note-create-button cursor-pointer h-11 rounded-xl border-green-200 bg-white text-green-700 shadow-sm transition hover:border-green-400 hover:bg-green-50 hover:text-green-800"
       >
         <Plus size={24} />
       </Button>

@@ -15,6 +15,7 @@ nav {
 .note-card {
     color: black;
     padding-inline: 10px;
+    min-width: 0;
 
     h2 {
         font-size: 1.5rem;
@@ -36,36 +37,81 @@ nav {
 }
 
 .note-list {
-    display: flex;
-    gap: 2rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
+    gap: 1rem;
+    padding: 0;
+    list-style: none;
 
     li {
+        display: flex;
+        flex-direction: column;
         background-color: #635e5ec4;
         padding: 10px;
-        margin: 10px 0;
+        margin: 0;
         border-radius: 5px;
+        min-width: 0;
+        overflow-wrap: anywhere;
+
+        p {
+            white-space: pre-wrap;
+        }
     }
-    hr{
+
+    hr {
         margin-top: 8px;
         height: 1px;
         border-top-width: 2px;
-        color: grey
+        color: grey;
     }
 }
 
-.note-btn{
+.note-search-container {
+    width: calc(100% - 2rem);
+    max-width: 48rem;
+    margin: 1rem auto;
+}
+
+.note-search {
+    width: 100%;
+    min-width: 0;
+}
+
+.note-btn {
     display: flex;
     justify-content: space-between;
+    margin-top: auto;
 
-    Button{
+    Button {
         padding: 0;
         margin: 0;
         color: white;
         cursor: pointer;
-        font-size: 10rem;
     }
 
-    Button:hover{
+    Button:hover {
         color: rgba(255, 255, 255, 0.384);
+    }
+}
+
+.note-create-button {
+    position: fixed;
+    right: 1.25rem;
+    bottom: 1.25rem;
+    z-index: 10;
+}
+
+@media (max-width: 640px) {
+    .note-card {
+        padding-inline: 0.75rem;
+    }
+
+    .note-list {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 0.75rem;
+    }
+
+    .note-search-container {
+        width: calc(100% - 1.5rem);
     }
 }
