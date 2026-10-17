@@ -6,7 +6,7 @@ const api = axios.create({
 });
 
 const refreshApi = axios.create({
-    baseURL: "http://localhost:3000",
+    baseURL: "https://mern-practice-app-mf0a.onrender.com",
     withCredentials: true
 });
 
