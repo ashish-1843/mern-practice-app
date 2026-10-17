@@ -14,7 +14,7 @@ app.use(cookieParser());
 
 
 app.use(cors({
-    origin: "http://localhost:5173",
+    origin: "https://mern-practice-app.vercel.app",
     credentials: true
 }));
 
