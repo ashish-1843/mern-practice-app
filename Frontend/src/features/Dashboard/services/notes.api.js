@@ -1,4 +1,4 @@
-import axios from 'axios';;
+import axios from 'axios';
 
 const api = axios.create({
     baseURL: 'https://mern-practice-app-mf0a.onrender.com',
