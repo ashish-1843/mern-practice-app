@@ -10,19 +10,32 @@ export const AuthProvider = ({ children }) => {
     const [error,setError] = useState(null);
 
     useEffect(() => {
+
+        let isMounted = true;
         const restore = async () => {
             try {
                 const data = await restoreSession();
-                setUser(data.user);
+                if (isMounted) {
+                    setUser(data.user);
+                    setError(null);
+                }
             } catch (err){
-                setUser(null);
-                throw err;
+                 if (isMounted) {
+                    setUser(null);
+                    setError(null);
+                }
             } finally {
-                setLoading(false);
+                if (isMounted) {
+                    setLoading(false);
+                }
             }
         };
 
         restore();
+
+        return () => {
+            isMounted = false;
+        };
     }, []);
 
 
