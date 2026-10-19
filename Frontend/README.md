@@ -1,120 +1,63 @@
 # Frontend
 
-A React + Vite frontend for the MERN app. It handles account creation, login, email verification, and a protected dashboard, while communicating with the Express backend in the sibling `Backend` folder.
+A React 19 single-page application built with Vite. It provides registration, email verification, login, a protected dashboard, and note creation. The frontend uses React Router, Axios, Tailwind CSS, and shared UI components.
 
-## ✨ Features
+## Requirements
 
-- User registration
-- Login flow with token-based session handling
-- Email verification screen
-- Protected dashboard route
-- Responsive UI with React, Bootstrap, Tailwind, and custom shadcn-style components
-- API integration with Axios and cookie-based refresh flow
+- Node.js and npm (use a Node.js release supported by the installed Vite version)
+- The API backend; see [the backend README](../Backend/README.md)
 
-## ✅ Requirements
+## Setup and development
 
-Before running this app, make sure you have:
-
-- Node.js and npm
-- A version of Node supported by Vite 8
-- The backend running locally at `http://localhost:3000`
-
-## 🚀 Quick start
-
-From this folder, run:
+From this directory:
 
 ```bash
 npm install
 npm run dev
 ```
 
-Then open:
+Open the Vite URL shown in the terminal (normally `http://localhost:5173`).
 
-- Frontend: `http://localhost:5173`
-- Backend API: `http://localhost:3000`
-
-> The frontend API client and backend CORS settings are expected to match these local URLs. If you change ports, update both sides together.
-
-## 📜 Available scripts
+## Scripts
 
 | Command | Description |
 | --- | --- |
-| `npm run dev` | Start the Vite dev server with hot reloading. |
+| `npm run dev` | Start the Vite development server with hot reloading. |
 | `npm run build` | Build the production bundle in `dist/`. |
 | `npm run preview` | Preview the production build locally. |
-| `npm run lint` | Run the project linter with Oxlint. |
+| `npm run lint` | Run Oxlint. |
 
-## 🧭 App routes
+## Routes
 
 | Route | Page | Access |
 | --- | --- | --- |
+| `/` | Login | Public |
+| `/login` | Login | Public |
 | `/register` | Create an account | Public |
-| `/login` | Sign in | Public |
 | `/verify-email` | Enter the email verification code | Public |
-| `/dashboard` | Dashboard and navigation | Requires authentication |
-| `/dashboard/notes` | Notes management | Requires authentication |
+| `/dashboard` | Dashboard | Requires authentication |
+| `/create-note` | Create a note | Requires authentication |
 
-Authentication is managed through the auth context. The app sends the access token on requests, uses credentialed requests for the refresh-token cookie, and restores the saved session when the app loads.
+Authentication state is managed by the auth context. The app stores the access token in `localStorage`, sends it as a bearer token, and uses a credentialed refresh request to restore a session from the refresh-token cookie.
 
-## 📦 Main dependencies
+## Backend connection
 
-### Runtime dependencies
+Both API clients currently use the deployed API URL `https://mern-practice-app-mf0a.onrender.com`:
 
-| Package | Purpose |
-| --- | --- |
-| `@base-ui/react` | Accessible UI primitives |
-| `@fontsource-variable/geist` | Variable font assets |
-| `@tailwindcss/vite` | Tailwind integration for Vite |
-| `axios` | HTTP client for backend requests |
-| `bootstrap` | Styling utilities |
-| `class-variance-authority` | Component variant definitions |
-| `cn` | Class-name utility |
-| `lucide-react` | Icons |
-| `react` | UI library |
-| `react-bootstrap` | Bootstrap React components |
-| `react-dom` | DOM rendering |
-| `react-icons` | Additional icon set |
-| `react-router` | Routing |
-| `react-toastify` | Toast notifications |
-| `sass` | Stylesheet preprocessing |
-| `shadcn` | UI component setup and generation |
-| `tailwindcss` | Utility-first CSS |
-| `tw-animate-css` | Animation utilities |
+- `src/features/auth/services/auth.api.js`
+- `src/features/Dashboard/services/notes.api.js`
 
-### Development dependencies
+For local development, change each client's `baseURL` to the backend URL (normally `http://localhost:3000`) and configure the backend CORS origin in `Backend/src/app.js` to match the frontend origin (normally `http://localhost:5173`). The backend requires the environment variables described in [its README](../Backend/README.md).
 
-| Package | Purpose |
-| --- | --- |
-| `@types/react` | React type definitions |
-| `@types/react-dom` | React DOM type definitions |
-| `@vitejs/plugin-react` | React support for Vite |
-| `oxlint` | Linting |
-| `vite` | Dev server and bundler |
-
-This project includes shadcn configuration in `components.json` and shared UI components in `src/components/ui/`.
-
-## 🗂️ Project structure
+## Source layout
 
 ```text
 src/
-├── components/ui/       # Shared UI components
+├── components/ui/         # Shared UI primitives
 ├── features/
-│   ├── auth/            # Authentication context, pages, and API client
-│   └── Dashboard/       # Dashboard page and navigation
-├── lib/                 # Shared utilities
-├── App.jsx              # App providers and router
-├── app.routes.jsx       # Route definitions
-└── ...
+│   ├── auth/              # Auth context, pages, hooks, and API client
+│   └── Dashboard/         # Dashboard, note UI, state, and API client
+├── App.jsx                # Providers and router
+├── app.routes.jsx         # Route definitions
+└── main.jsx               # Application entry point
 ```
-
-## 🔗 Backend connection
-
-The API base URL is currently set in `src/features/auth/services/auth.api.js` to `http://localhost:3000`.
-
-To run the full app, start the backend separately by following [the backend README](../Backend/README.md).
-
-## 📝 Notes
-
-- Use `npm install` before starting development.
-- If you change the local server ports, update both the frontend API config and backend CORS config.
-- This frontend is designed to work as a companion to the Express backend in the sibling folder.

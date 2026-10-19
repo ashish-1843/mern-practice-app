@@ -1,198 +1,47 @@
-# Backend
+# MERN Practice App
 
-The backend is a Node.js and Express API using MongoDB through Mongoose. It currently provides account registration, login, email verification, token refresh, session restoration, and logout endpoints.
+A notes application built with a React frontend and an Express/MongoDB backend. Users can register, verify their email, sign in, and create, update, and delete their notes.
+
+## Repository layout
+
+| Folder | Description |
+| --- | --- |
+| [`Frontend/`](./Frontend/) | React 19 application built with Vite. |
+| [`Backend/`](./Backend/) | Express API, MongoDB models, authentication, and note endpoints. |
 
 ## Requirements
 
-- Node.js and npm
+- Node.js and npm (use a Node.js release supported by the installed Vite version)
 - MongoDB connection string
-- Gmail OAuth2 credentials for sending verification emails
+- Gmail OAuth2 credentials for sending registration verification emails
 
-## Setup
+## Run locally
 
-From this folder, install dependencies:
-
-```bash
-npm install
-```
-
-Create a `.env` file in this folder and provide the configuration keys below. Use your own values; do not commit `.env` or share its credentials.
-
-
-All listed variables are required at startup. `GOOGLE_*` values are used by Nodemailer to send mail through Gmail OAuth2.
-
-## Run the API
+Install and configure the backend first; see the [backend setup instructions](./Backend/README.md). Then install and start the frontend:
 
 ```bash
-npm run dev
-```
-
-The development script starts `server.js` using `npx nodemon`. The API listens on the `PORT` set in `.env`; the frontend is configured to call `http://localhost:3000` and the API currently allows the `http://localhost:5173` CORS origin.
-
-## API
-
-All endpoints are prefixed with `/api/auth`.
-
-| Method | Path | Access | Purpose |
-| --- | --- | --- | --- |
-| `POST` | `/register` | Public | Register with a username, email, and password. |
-| `POST` | `/login` | Public | Sign in with an email and password. |
-| `POST` | `/verify-email` | Public | Verify an email using the submitted one-time code. |
-| `POST` | `/refresh` | Public | Issue a new access token using the refresh-token cookie. |
-| `GET` | `/get-me` | Authenticated | Return the current user using the bearer access token. |
-| `GET` | `/logout` | Authenticated | Log out of the current session. |
-
-The frontend sends requests with credentials enabled and attaches the access token as a bearer token. The refresh endpoint relies on the refresh-token cookie.
-
-## Packages
-
-| Package | Use |
-| --- | --- |
-| `bcrypt` | Hash passwords and other sensitive values. |
-| `cookie-parser` | Read cookies on incoming requests. |
-| `cors` | Configure cross-origin requests from the frontend. |
-| `dotenv` | Load configuration from `.env`. |
-| `express` | HTTP server and API routing. |
-| `jsonwebtoken` | Create and verify JSON Web Tokens. |
-| `mongoose` | MongoDB connection and data models. |
-| `nodemailer` | Send email through Gmail OAuth2. |
-
-## Project structure
-
-```text
-server.js                  # Starts the configured Express app
-src/
-├── app.js                 # Middleware, database connection, and API mounting
-├── config/                # Environment configuration and MongoDB connection
-├── controllers/           # Authentication endpoint handlers
-├── middlewares/           # Access-token authentication
-├── models/                # User, session, OTP, and token blacklist models
-├── routes/                # Authentication routes
-├── services/              # Email delivery
-└── utils/                 # Shared utilities
-```
-
-## Tests
-
-There is no backend test suite configured yet. The current `npm test` script is a placeholder and exits with an error.
-
-
-# Frontend
-
-A React + Vite frontend for the MERN app. It handles account creation, login, email verification, and a protected dashboard, while communicating with the Express backend in the sibling `Backend` folder.
-
-## ✨ Features
-
-- User registration
-- Login flow with token-based session handling
-- Email verification screen
-- Protected dashboard route
-- Responsive UI with React, Bootstrap, Tailwind, and custom shadcn-style components
-- API integration with Axios and cookie-based refresh flow
-
-## ✅ Requirements
-
-Before running this app, make sure you have:
-
-- Node.js and npm
-- A version of Node supported by Vite 8
-- The backend running locally at `http://localhost:3000`
-
-## 🚀 Quick start
-
-From this folder, run:
-
-```bash
+cd Frontend
 npm install
 npm run dev
 ```
 
-Then open:
+The Vite development server is normally available at `http://localhost:5173`. The backend's `npm start` command listens on the port configured by `PORT`.
 
-- Frontend: `http://localhost:5173`
-- Backend API: `http://localhost:3000`
+### Local API configuration
 
-> The frontend API client and backend CORS settings are expected to match these local URLs. If you change ports, update both sides together.
+The frontend API clients currently use the deployed API at `https://mern-practice-app-mf0a.onrender.com`, and the backend currently allows the deployed frontend origin `https://frontend-y50p.onrender.com` through CORS. To use a local frontend and backend together, update the API base URL in both files below to your local backend URL, and update the CORS origin in `Backend/src/app.js` to your local frontend URL:
 
-## 📜 Available scripts
+- `Frontend/src/features/auth/services/auth.api.js`
+- `Frontend/src/features/Dashboard/services/notes.api.js`
+- `Backend/src/app.js`
 
-| Command | Description |
-| --- | --- |
-| `npm run dev` | Start the Vite dev server with hot reloading. |
-| `npm run build` | Build the production bundle in `dist/`. |
-| `npm run preview` | Preview the production build locally. |
-| `npm run lint` | Run the project linter with Oxlint. |
+Keep the backend `PORT` consistent with the local API URL.
 
-## 🧭 App routes
+## Features
 
-| Route | Page | Access |
-| --- | --- | --- |
-| `/register` | Create an account | Public |
-| `/login` | Sign in | Public |
-| `/verify-email` | Enter the email verification code | Public |
-| `/dashboard` | Dashboard and navigation | Requires authentication |
+- Registration and email verification
+- Login, protected pages, session restoration, and logout
+- Create, list, update, and delete user-owned notes
+- Access tokens with a refresh-token cookie
 
-Authentication is managed through the auth context. The app sends the access token on requests, uses credentialed requests for the refresh-token cookie, and restores the saved session when the app loads.
-
-## 📦 Main dependencies
-
-### Runtime dependencies
-
-| Package | Purpose |
-| --- | --- |
-| `@base-ui/react` | Accessible UI primitives |
-| `@fontsource-variable/geist` | Variable font assets |
-| `@tailwindcss/vite` | Tailwind integration for Vite |
-| `axios` | HTTP client for backend requests |
-| `bootstrap` | Styling utilities |
-| `class-variance-authority` | Component variant definitions |
-| `cn` | Class-name utility |
-| `lucide-react` | Icons |
-| `react` | UI library |
-| `react-bootstrap` | Bootstrap React components |
-| `react-dom` | DOM rendering |
-| `react-icons` | Additional icon set |
-| `react-router` | Routing |
-| `react-toastify` | Toast notifications |
-| `sass` | Stylesheet preprocessing |
-| `shadcn` | UI component setup and generation |
-| `tailwindcss` | Utility-first CSS |
-| `tw-animate-css` | Animation utilities |
-
-### Development dependencies
-
-| Package | Purpose |
-| --- | --- |
-| `@types/react` | React type definitions |
-| `@types/react-dom` | React DOM type definitions |
-| `@vitejs/plugin-react` | React support for Vite |
-| `oxlint` | Linting |
-| `vite` | Dev server and bundler |
-
-This project includes shadcn configuration in `components.json` and shared UI components in `src/components/ui/`.
-
-## 🗂️ Project structure
-
-```text
-src/
-├── components/ui/       # Shared UI components
-├── features/
-│   ├── auth/            # Authentication context, pages, and API client
-│   └── Dashboard/       # Dashboard page and navigation
-├── lib/                 # Shared utilities
-├── App.jsx              # App providers and router
-├── app.routes.jsx       # Route definitions
-└── ...
-```
-
-## 🔗 Backend connection
-
-The API base URL is currently set in `src/features/auth/services/auth.api.js` to `http://localhost:3000`.
-
-To run the full app, start the backend separately by following [the backend README](../Backend/README.md).
-
-## 📝 Notes
-
-- Use `npm install` before starting development.
-- If you change the local server ports, update both the frontend API config and backend CORS config.
-- This frontend is designed to work as a companion to the Express backend in the sibling folder.
+See the [frontend README](./Frontend/README.md) for frontend scripts and routes, and the [backend README](./Backend/README.md) for configuration and API details.
