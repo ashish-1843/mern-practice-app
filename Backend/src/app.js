@@ -14,7 +14,7 @@ app.use(cookieParser());
 
 
 app.use(cors({
-    origin: "https://mern-practice-app.vercel.app",
+    origin: "https://frontend-y50p.onrender.com",
     credentials: true
 }));
 
