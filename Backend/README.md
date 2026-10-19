@@ -16,19 +16,6 @@ From this directory, install dependencies:
 npm install
 ```
 
-Create `Backend/.env` with the following required settings. Replace the example values with your own; never commit or share real credentials.
-
-```dotenv
-PORT=3000
-MONGO_URL=mongodb+srv://<username>:<password>@<cluster>/<database>
-JWT_SECRET=replace-with-a-long-random-secret
-GOOGLE_CLIENT_ID=your-google-oauth-client-id
-GOOGLE_CLIENT_SECRET=your-google-oauth-client-secret
-GOOGLE_REFRESH_TOKEN=your-google-oauth-refresh-token
-GOOGLE_USER=your-gmail-address
-```
-
-The server requires every variable above at startup. The `GOOGLE_*` values are used by Nodemailer to send verification email through Gmail OAuth2.
 
 ## Run
 
