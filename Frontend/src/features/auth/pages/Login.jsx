@@ -20,8 +20,8 @@ const Login = () => {
         setIsLoading(true);
         try {
             const data = await handleLogin({ email, password });
-            console.log(data);
-            if (!data.isVerified) {
+            console.log(data.user.isVerified);
+            if (!data.user.isVerified) {
                 navigate('/verify-email');
                 return;
             }
