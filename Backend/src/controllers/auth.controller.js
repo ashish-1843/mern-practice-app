@@ -178,7 +178,8 @@ const userLoginController = async (req, res) => {
             message: "User login successfully.",
             user: {
                 id: user._id,
-                username: user.username
+                username: user.username,
+                isVerified: user.isVerified
             }, accessToken
         })
 
