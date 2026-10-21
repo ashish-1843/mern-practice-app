@@ -140,8 +140,8 @@ const userLoginController = async (req, res) => {
             });
 
             await sendEmail(email, "OTP Verfication", `Your OTP code is ${otp}`, html)
-            
-            return res.status(401).json({ message: "Email not verified." });
+
+            res.status(401).json({ message: "Email not verified." });
         }
 
         const refreshToken = jwt.sign({
