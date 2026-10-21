@@ -14,11 +14,7 @@ app.use(cookieParser());
 
 
 app.use(cors({
-    origin: 
-    [
-        "https://frontend-y50p.onrender.com",
-        "http://localhost:5173/",
-    ],
+    origin: "https://frontend-y50p.onrender.com",
     credentials: true
 }));
 
