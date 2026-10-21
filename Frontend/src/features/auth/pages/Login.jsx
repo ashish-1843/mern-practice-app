@@ -20,17 +20,15 @@ const Login = () => {
         setIsLoading(true);
         try {
             const data = await handleLogin({ email, password });
-
+            console.log(data);
             if (!data.isVerified) {
                 navigate('/verify-email');
+                return;
             }
-            else {
-                toast.success("Login successfully!");
-                setTimeout(() => {
-                    navigate('/dashboard');
-                }, 0.0001);
-            }
-
+            toast.success("Login successfully!");
+            setTimeout(() => {
+                navigate('/dashboard');
+            }, 0.0001);
 
         } catch (err) {
             toast.error(err.response?.data?.message)
