@@ -16,7 +16,7 @@ const Dashboard = () => {
       <div className='main-container py-12 md:py-24 lg:py-32 xl:py-48'>
         <div className=' max-w-3xl px-4 mx-auto md:px-6'>
           <div className=' flex flex-col items-center space-y-4 text-center'>
-            {user && <h1 className='text-green-500 text-2xl font-bold'>Welcome {user.username}</h1>}
+            {user && <h1 className='break-words text-green-500 text-2xl font-bold'>Welcome {user.username}</h1>}
 
             <div className='space-y-2'>
               <Badge variant="secondary" className='border-green-400 text-green-300 mt-4'>
@@ -33,12 +33,12 @@ const Dashboard = () => {
                 with you and keeps your ideas secure in the cloud.
               </p>
 
-              <div className="flex gap-2 items-center justify-center">
-                <Button onClick={() => navigate('/create-note')} size="lg" className="h-12 px-8  py-8 relative bg-green-600 hover:bg-green-500 cursor-pointer">
+              <div className="hero-actions flex gap-2 items-center justify-center">
+                <Button onClick={() => navigate('/create-note')} size="lg" className="hero-action h-12 px-8 relative bg-green-600 hover:bg-green-500 cursor-pointer">
                   Start Taking Notes
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
-                <Button variant="outline" size="lg" className="h-12 px-8 bg-white text-green-800 cursor-pointer">
+                <Button variant="outline" size="lg" className="hero-action h-12 px-8 bg-white text-green-800 cursor-pointer">
                   Watch Demo
                 </Button>
               </div>

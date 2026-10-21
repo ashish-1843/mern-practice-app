@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router';
 import { useAuth } from '../hooks/useAuth';
 import { toast } from 'react-toastify';
+import '../auth.form.css'
 
 const VerifyEmail = () => {
 
@@ -63,9 +64,9 @@ const VerifyEmail = () => {
 
 
     return (
-        <main>
+        <main className='auth-page'>
             <div className='form-container'>
-                <h1>Verify Your Email</h1>
+                <h1 className='text-green-600'>Verify Your Email</h1>
                 <p>Enter the 6-digit code sent to your email address.</p>
                     <div className='otp-input'>
                         {code.map((digit, index) => (
@@ -82,7 +83,7 @@ const VerifyEmail = () => {
                         ))}
                     </div>
                     {err && <p className=''>{err}</p>}
-                    <button className='btn primary-btn' onClick={handleSubmit}>
+                    <button className='btn primary-btn bg-green-500' onClick={handleSubmit}>
                         {loading ? "Verifying..." : "Verify Email"}
                     </button>
             </div>

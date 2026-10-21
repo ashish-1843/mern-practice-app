@@ -12,6 +12,15 @@ nav {
     padding-block: 8px;
 }
 
+.app-navbar .nav-links {
+    list-style: none;
+}
+
+.nav-secondary-link,
+.hero-action {
+    white-space: nowrap;
+}
+
 .note-card {
     color: black;
     padding-inline: 10px;
@@ -102,6 +111,34 @@ nav {
 }
 
 @media (max-width: 640px) {
+    .app-navbar {
+        padding-inline: 0.75rem;
+    }
+
+    .app-navbar > div {
+        gap: 0.75rem;
+    }
+
+    .app-navbar h1 {
+        font-size: 1.125rem;
+    }
+
+    .app-navbar .nav-links {
+        gap: 0.75rem;
+        font-size: 0.95rem;
+    }
+
+    .hero-actions {
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .hero-action {
+        width: 100%;
+        max-width: 20rem;
+        white-space: normal;
+    }
+
     .note-card {
         padding-inline: 0.75rem;
     }
@@ -113,5 +150,11 @@ nav {
 
     .note-search-container {
         width: calc(100% - 1.5rem);
+    }
+}
+
+@media (max-width: 400px) {
+    .app-navbar .nav-secondary-link {
+        display: none;
     }
 }

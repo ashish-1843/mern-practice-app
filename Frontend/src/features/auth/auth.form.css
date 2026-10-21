@@ -1,10 +1,11 @@
-main{
-    height: 100vh;
+.auth-page{
+    min-height: 100vh;
+    min-height: 100svh;
     width: 100%;
-    
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 1.5rem;
 
 
     .form-container{
@@ -12,7 +13,8 @@ main{
         padding-block: 2rem;
         border-radius: 1rem;
         background-color: rgb(45, 46, 46);
-        min-width: 400px;
+        width: 100%;
+        max-width: 28rem;
         display:flex;
         flex-direction: column;
         gap: 0.75rem;
@@ -29,6 +31,11 @@ main{
         flex-direction: column;
         gap: 0.75rem;
         position: relative;
+
+        input{
+            width: 100%;
+            min-width: 0;
+        }
 
         .pass-btn{
             position: absolute;
@@ -55,14 +62,19 @@ main{
 
     .otp-input{
         display: flex;
-        gap: 1rem;
+        justify-content: space-between;
+        gap: clamp(0.375rem, 2.5vw, 1rem);
 
         input{
             font-size: 18px;
             text-align: center;
             font-weight: 600;
-            width: 60px;
-            height: 60px;
+            flex: 1;
+            width: auto;
+            max-width: 3.75rem;
+            min-width: 0;
+            height: auto;
+            aspect-ratio: 1;
             background-color: rgba(245, 245, 245, 0.608);
             color: rgba(0, 0, 0, 0.734)
         }
@@ -79,4 +91,18 @@ main{
     }
 
 
+}
+
+@media (max-width: 480px) {
+    .auth-page {
+        padding: 1rem;
+
+        .form-container {
+            padding: 1.5rem 1.25rem;
+        }
+
+        .otp-input input {
+            font-size: 1rem;
+        }
+    }
 }

@@ -20,7 +20,7 @@ const userRegisterController = async (req, res) => {
     try {
         const { username, email, password } = req.body;
 
-        if(!email || !password || !username){
+        if (!email || !password || !username) {
             return res.status(401).json({
                 message: "Please fill the fileds."
             });
@@ -104,7 +104,7 @@ const userLoginController = async (req, res) => {
     try {
         const { username, email, password } = req.body;
 
-        if(!email || !password){
+        if (!email || !password) {
             return res.status(401).json({
                 message: "Please fill the fileds."
             });
@@ -125,6 +125,23 @@ const userLoginController = async (req, res) => {
 
         if (!isPasswordValid) {
             return res.status(401).json({ message: "Invalid email or password." });
+        }
+
+        if (!user.isVerified) {
+            const otp = generateOtp();
+            const html = getOtpHtml(otp);
+
+            const otpHash = crypto.createHash("sha256").update(otp).digest("hex");
+
+            otpModel.create({
+                email,
+                otpHash,
+                user: user._id
+            });
+
+            await sendEmail(email, "OTP Verfication", `Your OTP code is ${otp}`, html)
+            
+            return res.status(401).json({ message: "Email not verified." });
         }
 
         const refreshToken = jwt.sign({
@@ -178,13 +195,13 @@ const userLoginController = async (req, res) => {
  */
 const verifyEmailController = async (req, res) => {
     const { otp } = req.body;
-    
-    if(!otp){
+
+    if (!otp) {
         return res.status(400).json({
             message: "Please enter the OTP."
         })
     }
-    
+
     const otpHash = crypto.createHash("sha256").update(otp).digest("hex");
 
     const otpDoc = await otpModel.findOne({
@@ -267,7 +284,7 @@ const refreshAccessTokenController = async (req, res) => {
         return res.status(401).json({
             message: "Invalid and expired refresh token."
         });
-        
+
     }
 }
 
@@ -276,11 +293,11 @@ const refreshAccessTokenController = async (req, res) => {
  * @description Get the current logged in user details.
  * @acess Private
  */
-const getMeController = async (req,res) =>{
-    try{
+const getMeController = async (req, res) => {
+    try {
         const user = await userModel.findById(req.user.id).select("-password");
 
-        if(!user){
+        if (!user) {
             return res.status(404).json({
                 message: "User not fetched."
             });
@@ -295,7 +312,7 @@ const getMeController = async (req,res) =>{
             }
         });
     }
-    catch(err){
+    catch (err) {
         console.log("Get me error : ", err);
         return res.status(500).json({
             message: "Something went wrong."
@@ -308,32 +325,32 @@ const getMeController = async (req,res) =>{
  * @description logout from the current session.
  * @access Private
  */
-const logoutController = async (req,res) =>{
-    try{
+const logoutController = async (req, res) => {
+    try {
         const accessToken = req.headers.authorization?.startsWith("Bearer ")
-        ? req.headers.authorization.split(" ")[1]
-        : null;
+            ? req.headers.authorization.split(" ")[1]
+            : null;
 
         const refreshToken = req.cookies.refreshToken;
 
-        if(!accessToken){
+        if (!accessToken) {
             return res.status(400).json({
                 message: "Access token in not provided."
             });
         }
-        else{
+        else {
             await blacklistModel.create({
                 token: accessToken,
                 type: "access"
             });
         }
 
-        if(!refreshToken){
+        if (!refreshToken) {
             return res.status(400).json({
                 message: "Refresh token is not found."
-            });1
+            }); 1
         }
-        else{
+        else {
             await blacklistModel.create({
                 token: refreshToken,
                 type: "refresh"
@@ -341,13 +358,13 @@ const logoutController = async (req,res) =>{
         }
 
         const refreshTokenHash = crypto.createHash("sha256").update(refreshToken).digest("hex");
-        
+
         const session = await sessionModel.findOne({
             refreshTokenHash,
             revoked: false
         });
 
-        if(!session){
+        if (!session) {
             return res.status(400).json({
                 message: "Refresh token is invalid."
             });
@@ -363,7 +380,7 @@ const logoutController = async (req,res) =>{
         });
 
     }
-    catch(err){
+    catch (err) {
         console.log("Give me error : ", err);
         return res.status(400).json({
             message: "Something went wrong."
@@ -371,11 +388,11 @@ const logoutController = async (req,res) =>{
     }
 }
 
-module.exports = { 
-    userRegisterController, 
-    userLoginController, 
-    verifyEmailController, 
-    refreshAccessTokenController, 
+module.exports = {
+    userRegisterController,
+    userLoginController,
+    verifyEmailController,
+    refreshAccessTokenController,
     getMeController,
     logoutController
 }

@@ -29,17 +29,17 @@ const Navbar = () => {
     }
 
     return (
-        <nav className='border-b border-gray-200 bg-transparent'>
+        <nav className='app-navbar border-b border-gray-200 bg-transparent'>
             <div className='flex justify-between items-center'>
                 <div className='flex gap-2 items-center'>
                     <BookOpen className='h-6 w-6 text-green-600' />
                     <h1 className='font-bold text-xl'><span className='text-green-600'>Notes</span>App</h1>
                 </div>
                 <div className='flex items-center'>
-                    <ul className='flex gap-3 items-center text-lg font-semibold'>
-                        <li>Features</li>
-                        <li>Pricing</li>
-                        <li>About</li>
+                    <ul className='nav-links flex gap-3 items-center text-lg font-semibold'>
+                        <li className='nav-secondary-link'>Features</li>
+                        <li className='nav-secondary-link'>Pricing</li>
+                        <li className='nav-secondary-link'>About</li>
                         {
                             user ?
                                 <DropdownMenu>

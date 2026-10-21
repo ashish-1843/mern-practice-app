@@ -3,7 +3,7 @@ import '../auth.form.css'
 import { useState } from 'react'
 import { useAuth } from '../hooks/useAuth';
 import { toast } from 'react-toastify';
-import { Eye, EyeOff, User } from 'lucide-react';
+import { Eye, EyeOff} from 'lucide-react';
 
 const Register = () => {
 
@@ -35,11 +35,11 @@ const Register = () => {
     }
 
     if (loading) {
-        return (<main><h1>Loading......</h1></main>)
+        return (<main className='auth-page'><h1>Loading......</h1></main>)
     }
 
     return (
-        <main>
+        <main className='auth-page'>
             <div className='form-container'>
                 <h1 className='text-green-600'>Register</h1>
 

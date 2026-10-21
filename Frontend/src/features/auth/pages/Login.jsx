@@ -19,30 +19,37 @@ const Login = () => {
         e.preventDefault();
         setIsLoading(true);
         try {
-            await handleLogin({ email, password });
-            toast.success("Login successfully!")
-            setTimeout(() => {
-                navigate('/dashboard');
-            }, 0.0001);
-            
+            const data = await handleLogin({ email, password });
+
+            if (!data.isVerified) {
+                navigate('/verify-email');
+            }
+            else {
+                toast.success("Login successfully!");
+                setTimeout(() => {
+                    navigate('/dashboard');
+                }, 0.0001);
+            }
+
+
         } catch (err) {
             toast.error(err.response?.data?.message)
         }
 
-        finally{
-        setIsLoading(false);
+        finally {
+            setIsLoading(false);
         }
     }
 
-    if(loading){
-        return(
-        <main><h2>Loading...</h2></main>
+    if (loading) {
+        return (
+            <main className='auth-page'><h2>Loading...</h2></main>
         );
     }
 
 
     return (
-        <main>
+        <main className='auth-page'>
             <div className='form-container'>
                 <h1 className='text-green-600'>Login</h1>
                 <div className='input-group'>
@@ -63,7 +70,7 @@ const Login = () => {
                     />
 
                     <button className='pass-btn' onClick={() => setShowPassword(!showPassword)}>
-                        {showPassword ? <Eye size={20}/> : <EyeOff size={20}/>}
+                        {showPassword ? <Eye size={20} /> : <EyeOff size={20} />}
                     </button>
                 </div>
 
