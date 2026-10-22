@@ -1,14 +1,14 @@
 require('dotenv').config();
 
-if(!process.env.PORT){
+if (!process.env.PORT) {
     throw new Error("PORT is not defined in environment variables.");
 }
 
-if(!process.env.MONGO_URL){
+if (!process.env.MONGO_URL) {
     throw new Error("MONGO_URL is not defined in environment variables.");
 }
 
-if(!process.env.JWT_SECRET){
+if (!process.env.JWT_SECRET) {
     throw new Error("JWT_SECRET is not define in environment variables.");
 }
 
@@ -27,6 +27,10 @@ if (!process.env.GOOGLE_REFRESH_TOKEN) {
 
 if (!process.env.GOOGLE_USER) {
     throw new Error("GOOGLE_USER is not defined in environment variables");
+}
+
+if (!process.env.RESEND_API_KEY) {
+    throw new Error("RESEND_API_KEY is not defined in environment variables");
 }
 
 
