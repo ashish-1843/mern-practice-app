@@ -13,7 +13,7 @@ const Dashboard = () => {
   const navigate = useNavigate();
   return (
     <main className="dashboard-main relative w-full overflow-x-hidden">
-      <div className='main-container w-full py-12'>
+      <div className='w-full py-12'>
         <div className=' max-w-3xl px-4 mx-auto md:px-6'>
           <div className=' flex flex-col items-center space-y-4 text-center'>
             {user && <h1 className='break-words text-green-500 text-2xl font-bold'>Welcome {user.username}</h1>}
