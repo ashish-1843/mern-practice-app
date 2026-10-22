@@ -12,6 +12,23 @@ nav {
     padding-block: 8px;
 }
 
+.app-navbar {
+    height: 3rem;
+}
+
+.dashboard-main {
+    min-height: calc(100vh - 3rem);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@supports (height: 100svh) {
+    .dashboard-main {
+        min-height: calc(100svh - 3rem);
+    }
+}
+
 .app-navbar .nav-links {
     list-style: none;
 }
