@@ -141,7 +141,7 @@ const userLoginController = async (req, res) => {
 
             await sendEmail(email, "Verify your NotesApp email", `Your NotesApp verification code is ${otp}`, html)
 
-            res.status(200).json({ message: "OTP has sent on your email." });
+            return res.status(200).json({ message: "OTP has sent on your email." });
         }
 
         const refreshToken = jwt.sign({

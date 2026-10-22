@@ -21,7 +21,7 @@ const Login = () => {
         try {
             const data = await handleLogin({ email, password });
             console.log(data);
-            if (!data.user.isVerified) {
+            if (!data.user?.isVerified) {
                 navigate('/verify-email');
                 return;
             }
