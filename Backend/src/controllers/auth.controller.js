@@ -6,7 +6,7 @@ const config = require('../config/config');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { generateOtp, getOtpHtml } = require('../utils/util');
-const sendEmail = require('../services/email.service');
+const sendEmail  = require('../services/email.service');
 const crypto = require('crypto');
 
 /**
@@ -90,7 +90,7 @@ const userRegisterController = async (req, res) => {
     }
     catch (err) {
         console.error("Register error:", err);
-        return res.status(500).json({ message: "Something went wrong." });
+        return res.status(500).json({ message: "Something went wrong.", err });
     }
 
 }
