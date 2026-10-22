@@ -17,9 +17,12 @@ nav {
 }
 
 .dashboard-main {
+    min-height: 100vh;
+    min-height: 100svh;
+    width: 100%;
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
 }
 
 
@@ -126,7 +129,7 @@ nav {
         padding-inline: 0.75rem;
     }
 
-    .app-navbar > div {
+    .app-navbar>div {
         gap: 0.75rem;
     }
 
