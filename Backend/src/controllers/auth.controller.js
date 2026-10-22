@@ -52,7 +52,7 @@ const userRegisterController = async (req, res) => {
 
         const otpHash = crypto.createHash("sha256").update(otp).digest("hex");
 
-        otpModel.create({
+        await otpModel.create({
             email,
             otpHash,
             user: user._id
@@ -133,7 +133,7 @@ const userLoginController = async (req, res) => {
 
             const otpHash = crypto.createHash("sha256").update(otp).digest("hex");
 
-            otpModel.create({
+            await otpModel.create({
                 email,
                 otpHash,
                 user: user._id
@@ -141,7 +141,14 @@ const userLoginController = async (req, res) => {
 
             await sendEmail(email, "Verify your NotesApp email", `Your NotesApp verification code is ${otp}`, html)
 
-            return res.status(200).json({ message: "OTP has sent on your email." });
+            return res.status(200).json({
+                message: "OTP has sent on your email.",
+                user: {
+                    id: user._id,
+                    username: user.username,
+                    isVerified: user.isVerified
+                }
+            });
         }
 
         const refreshToken = jwt.sign({
