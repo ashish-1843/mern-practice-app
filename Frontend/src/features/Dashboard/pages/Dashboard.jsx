@@ -38,9 +38,6 @@ const Dashboard = () => {
                   Start Taking Notes
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
-                <Button variant="outline" size="lg" className="hero-action h-12 px-8 bg-white text-green-800 cursor-pointer">
-                  Watch Demo
-                </Button>
               </div>
               <p className="text-sm text-green-800">
                 Free forever • No credit card required • 2 minutes setup
