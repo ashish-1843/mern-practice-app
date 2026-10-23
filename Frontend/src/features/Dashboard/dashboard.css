@@ -17,18 +17,11 @@ nav {
 }
 
 .dashboard-main {
-    min-height: 100vh;
-    min-height: 100svh;
-    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-
-.app-navbar .nav-links {
-    list-style: none;
-}
 
 .nav-secondary-link,
 .hero-action {
@@ -36,26 +29,31 @@ nav {
 }
 
 .note-card {
-    color: black;
-    padding-inline: 10px;
+    width: min(100% - 2rem, 64rem);
+    margin: 1.5rem auto;
+    padding: 1.25rem;
+    color: whitesmoke;
+    background: linear-gradient(145deg, rgba(31, 41, 35, 0.96), rgba(24, 29, 27, 0.96));
+    border: 1px solid rgba(74, 222, 128, 0.18);
+    border-radius: 1rem;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.2);
     min-width: 0;
 
     h2 {
         font-size: 1.5rem;
         font-weight: bold;
-        margin-bottom: 10px;
+        margin-bottom: 1rem;
     }
 
     h3 {
-        font-size: 1.2rem;
+        font-size: 1.1rem;
         font-weight: bold;
-        margin-bottom: 5px;
+        margin-bottom: 0.5rem;
     }
 
     p {
-        margin-top: 5px;
-        color: whitesmoke;
-
+        margin-top: 0.25rem;
+        color: #d1d5db;
     }
 }
 
@@ -69,23 +67,31 @@ nav {
     li {
         display: flex;
         flex-direction: column;
-        background-color: #635e5ec4;
-        padding: 10px;
+        background: linear-gradient(145deg, rgba(55, 65, 59, 0.82), rgba(39, 45, 42, 0.9));
+        border: 1px solid rgba(134, 239, 172, 0.14);
+        padding: 1rem;
         margin: 0;
-        border-radius: 5px;
+        border-radius: 0.85rem;
         min-width: 0;
         overflow-wrap: anywhere;
+        transition: transform 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
 
         p {
             white-space: pre-wrap;
         }
     }
 
+    li:hover {
+        transform: translateY(-2px);
+        border-color: rgba(134, 239, 172, 0.35);
+        box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
+    }
+
     hr {
-        margin-top: 8px;
+        margin-top: 1rem;
         height: 1px;
-        border-top-width: 2px;
-        color: grey;
+        border: 0;
+        background: rgba(209, 213, 219, 0.18);
     }
 }
 
@@ -124,6 +130,13 @@ nav {
     z-index: 10;
 }
 
+.back-button {
+    position: fixed;
+    left: 1.25rem;
+    bottom: 1.25rem;
+    z-index: 10;
+}
+
 @media (max-width: 640px) {
     .app-navbar {
         padding-inline: 0.75rem;
@@ -154,7 +167,8 @@ nav {
     }
 
     .note-card {
-        padding-inline: 0.75rem;
+        width: calc(100% - 1.5rem);
+        padding: 1rem;
     }
 
     .note-list {

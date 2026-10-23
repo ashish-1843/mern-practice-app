@@ -1,12 +1,14 @@
 import axios from 'axios';
 
 const api = axios.create({
-    baseURL: 'https://mern-practice-app-mf0a.onrender.com',
+    // baseURL: 'https://mern-practice-app-mf0a.onrender.com',
+    baseURL: 'http://localhost:3000',
     withCredentials: true
 });
 
 const refreshApi = axios.create({
-    baseURL: "https://mern-practice-app-mf0a.onrender.com",
+    // baseURL: "https://mern-practice-app-mf0a.onrender.com",
+    baseURL: 'hhtp://localhost:3000',
     withCredentials: true
 });
 
@@ -101,7 +103,7 @@ export async function getMe(){
 
 export async function verifyEmail({otp}){
     const response = await api.post("/api/auth/verify-email", {otp});
-    return response;
+    return response.data;
 }
 
 export async function restoreSession() {

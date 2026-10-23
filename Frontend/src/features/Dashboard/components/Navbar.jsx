@@ -56,7 +56,7 @@ const Navbar = () => {
                                             <DropdownMenuItem className='text-base'><User />Profile</DropdownMenuItem>
                                             <DropdownMenuItem className='text-base'><BookA />Notes</DropdownMenuItem>
                                             <DropdownMenuSeparator />
-                                            <DropdownMenuItem className='text-base cursor-pointer'
+                                            <DropdownMenuItem className='text-base cursor-pointer hover:text-green-500'
                                                 onClick={logout}
                                             ><LogOut />Logout</DropdownMenuItem>
                                         </DropdownMenuGroup>

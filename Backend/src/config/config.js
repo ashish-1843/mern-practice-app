@@ -29,10 +29,6 @@ if (!process.env.GOOGLE_USER) {
     throw new Error("GOOGLE_USER is not defined in environment variables");
 }
 
-if (!process.env.RESEND_API_KEY) {
-    throw new Error("RESEND_API_KEY is not defined in environment variables");
-}
-
 
 const config = {
     PORT: process.env.PORT,
@@ -41,8 +37,7 @@ const config = {
     GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
     GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET,
     GOOGLE_REFRESH_TOKEN: process.env.GOOGLE_REFRESH_TOKEN,
-    GOOGLE_USER: process.env.GOOGLE_USER,
-    RESEND_API_KEY: process.env.RESEND_API_KEY
+    GOOGLE_USER: process.env.GOOGLE_USER
 }
 
 module.exports = config;

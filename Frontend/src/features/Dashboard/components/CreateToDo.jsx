@@ -12,10 +12,11 @@ import { Field, FieldGroup } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Button } from '@/components/ui/button'
-import { Delete, Edit, Plus, Search } from 'lucide-react'
+import { ArrowLeftIcon, Delete, Edit, Plus, Search } from 'lucide-react'
 import { useNotes } from '../hooks/useNotes'
 import '../dashboard.css';
 import { toast } from 'react-toastify'
+import { useNavigate } from 'react-router'
 
 const CreateToDo = () => {
 
@@ -27,6 +28,7 @@ const CreateToDo = () => {
   const [description, setDescription] = useState("");
   const [noteID, setNoteID] = useState("");
   const [search, setSearch] = useState("");
+  const navigate = useNavigate();
 
   const filteredNotes = notes.filter((note) => {
     return (
@@ -101,16 +103,16 @@ const CreateToDo = () => {
     <>
       <div className="note-search-container">
         <input type='text'
-                placeholder='Search notes by title or description..'
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-                className="note-search rounded-xl border border-green-200 bg-white !p-2 text-slate-800 outline-none transition focus:border-green-500 focus:ring-2 focus:ring-green-100 !bg-transparent text-white"
-              />
+          placeholder='Search notes by title or description..'
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          className="note-search rounded-xl border border-green-200 bg-white !p-2 text-slate-800 outline-none transition focus:border-green-500 focus:ring-2 focus:ring-green-100 !bg-transparent text-white"
+        />
       </div>
       {
         filteredNotes.length > 0 ? (
           <section className='note-card'>
-              <h2 className='text-green-600'>My Notes</h2>
+            <h2 className='text-green-600'>My Notes</h2>
             <ul className='note-list'>
               {filteredNotes.map((note, i) => (
                 <li>
@@ -131,11 +133,15 @@ const CreateToDo = () => {
                 </li>
               ))}
             </ul>
-        
+
           </section>
         ) : <p className='!mt-40 text-center text-green-600 font-bold'>{search.trim() ? 'No matching found' : "No data found"}</p>
       }
 
+      <Button
+        onClick={() => navigate(-1)}
+        className="back-button cursor-pointer h-11 rounded-xl border-green-200 bg-white text-green-700 shadow-sm transition hover:border-green-400 hover:bg-green-50 hover:text-green-800"
+      ><ArrowLeftIcon /></Button>
       <Button
         type="button"
         onClick={handleCreate}
@@ -181,7 +187,7 @@ const CreateToDo = () => {
         </DialogContent>
 
       </Dialog>
-      
+
     </>
   )
 }

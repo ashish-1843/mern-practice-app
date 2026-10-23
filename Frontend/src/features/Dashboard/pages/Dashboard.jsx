@@ -12,16 +12,16 @@ const Dashboard = () => {
   const { user } = useAuth();
   const navigate = useNavigate();
   return (
-    <main className="dashboard-main relative w-full overflow-x-hidden">
-      <div className='w-full py-12'>
-        <div className=' max-w-3xl px-4 mx-auto md:px-6'>
-          <div className=' flex flex-col items-center space-y-4 text-center'>
-            {user && <h1 className='break-words text-green-500 text-2xl font-bold'>Welcome {user.username}</h1>}
+    <main className="dashboard-main !mt-38">
+      
+        <div className='max-w-3xl px-4 mx-auto md:px-6'>
+          <div className='flex flex-col items-center space-y-4 text-center'>
+            {user && <h1 className='break-words text-green-500 text-3xl font-bold'>Welcome {user.username}</h1>}
 
             <div className='space-y-2'>
-              <Badge variant="secondary" className='border-green-400 text-green-300 mt-4'>
-                <Zap className='w-3 h-3 mr-1' />
-                New : AI-powered note organization
+              <Badge variant="secondary" className='border-green-400 text-green-300 !mt-2'>
+                <Zap className='w-3 h-3 !mr-1' />
+                New : AI-powered note organization 
               </Badge>
 
               <h1 className='text-green-600 font-bold text-3xl tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl'>Your thoughts, organized and accessible
@@ -45,13 +45,9 @@ const Dashboard = () => {
               <p className="text-sm text-green-800">
                 Free forever • No credit card required • 2 minutes setup
               </p>
-
-              
-
             </div>
           </div>
         </div>
-      </div>
     </main>
 
   )
