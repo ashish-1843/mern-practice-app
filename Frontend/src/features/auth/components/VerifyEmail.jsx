@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router';
 import { useAuth } from '../hooks/useAuth';
 import { toast } from 'react-toastify';
 import '../auth.form.css'
+import { Construction } from 'lucide-react';
 
 const VerifyEmail = () => {
 
@@ -50,11 +51,17 @@ const VerifyEmail = () => {
 
         const verificationCode = code.join("");
         try {
-            await handleVerifyEmail({ otp: verificationCode });
+            const data = await handleVerifyEmail({ otp: verificationCode });
             toast.success("Email verify successfully!");
-            setTimeout(() => {
-                navigate('/dashboard');
-            }, 1000);
+            if (data.user.resetPass) {
+                setTimeout(() => {
+                    navigate('/reset-password');
+                }, 1000);
+            } else {
+                setTimeout(() => {
+                    navigate('/dashboard');
+                }, 1000);
+            }
 
         } catch (err) {
             toast.error(err.response?.data?.message);
@@ -68,24 +75,24 @@ const VerifyEmail = () => {
             <div className='form-container'>
                 <h1 className='text-green-600'>Verify Your Email</h1>
                 <p>Enter the 6-digit code sent to your email address.</p>
-                    <div className='otp-input'>
-                        {code.map((digit, index) => (
-                            <input
-                                key={index}
-                                ref={(el) => (inputRefs.current[index] = el)}
-                                type='text'
-                                maxLength='6'
-                                value={digit}
-                                onChange={(e) => handleChange(index, e.target.value)}
-                                onKeyDown={(e) => handleKeyDown(index, e)}
-                                className=''
-                            />
-                        ))}
-                    </div>
-                    {err && <p className=''>{err}</p>}
-                    <button className='btn primary-btn bg-green-500' onClick={handleSubmit}>
-                        {loading ? "Verifying..." : "Verify Email"}
-                    </button>
+                <div className='otp-input'>
+                    {code.map((digit, index) => (
+                        <input
+                            key={index}
+                            ref={(el) => (inputRefs.current[index] = el)}
+                            type='text'
+                            maxLength='6'
+                            value={digit}
+                            onChange={(e) => handleChange(index, e.target.value)}
+                            onKeyDown={(e) => handleKeyDown(index, e)}
+                            className=''
+                        />
+                    ))}
+                </div>
+                {err && <p className=''>{err}</p>}
+                <button className='btn primary-btn bg-green-500' onClick={handleSubmit}>
+                    {loading ? "Verifying..." : "Verify Email"}
+                </button>
             </div>
         </main>
     )

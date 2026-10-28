@@ -98,7 +98,6 @@ const CreateToDo = () => {
   }
 
 
-
   return (
     <>
       <div className="note-search-container">

@@ -20,7 +20,7 @@ const Login = () => {
         setIsLoading(true);
         try {
             const data = await handleLogin({ email, password });
-            console.log(data);
+            
             if (!data.user?.isVerified) {
                 navigate('/verify-email');
                 return;
@@ -60,7 +60,8 @@ const Login = () => {
                 </div>
 
                 <div className='input-group'>
-                    <label htmlFor='password'>Password</label>
+                    <label htmlFor='password'>Password <Link to={'/forgot-password'} 
+                    className='absolute !right-0'>Forgot password?</Link></label>
                     <input
                         onChange={(e) => { setPassword(e.target.value) }}
                         type={showPassword ? "text" : "password"} id='password' name='password' placeholder='Enter your password'

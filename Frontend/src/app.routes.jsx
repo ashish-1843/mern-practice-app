@@ -6,6 +6,8 @@ import Dashboard from './features/Dashboard/pages/Dashboard';
 import VerifyEmail from './features/auth/components/VerifyEmail';
 import Navbar from './features/Dashboard/components/Navbar';
 import CreateToDo from './features/Dashboard/components/CreateToDo';
+import ForgotPassEmail from './features/auth/components/ForgotPassEmail';
+import ResetPass from './features/auth/components/ResetPass';
 
 
 export const router = createBrowserRouter([
@@ -32,5 +34,13 @@ export const router = createBrowserRouter([
     {
         path: '/create-note',
         element: <Protected><Navbar/><CreateToDo/></Protected>
+    },
+    {
+        path: '/forgot-password',
+        element: <ForgotPassEmail/>
+    },
+    {
+        path: '/reset-password',
+        element: <Protected><ResetPass/></Protected>
     }
 ])

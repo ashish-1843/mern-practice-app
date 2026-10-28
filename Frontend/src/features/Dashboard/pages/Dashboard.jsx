@@ -11,6 +11,7 @@ const Dashboard = () => {
 
   const { user } = useAuth();
   const navigate = useNavigate();
+  
   return (
     <main className="dashboard-main !mt-38">
       

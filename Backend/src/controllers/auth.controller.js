@@ -6,7 +6,7 @@ const config = require('../config/config');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { generateOtp, getOtpHtml } = require('../utils/util');
-const sendEmail  = require('../services/email.service');
+const sendEmail = require('../services/email.service');
 const crypto = require('crypto');
 
 /**
@@ -236,7 +236,8 @@ const verifyEmailController = async (req, res) => {
             id: user._id,
             username: user.username,
             email: user.email,
-            verified: user.isVerified
+            verified: user.isVerified,
+            resetPass: user.resetPass
         }
     })
 }
@@ -396,11 +397,108 @@ const logoutController = async (req, res) => {
     }
 }
 
+/**
+ * @route /api/auth/forgot-password
+ * @description send otp to user email to reset password.
+ * @access Public
+ */
+const forgotPasswordController = async (req, res) => {
+    try {
+        const { email } = req.body;
+
+        if (!email) {
+            return res.status(401).json({
+                message: "Please fill the email!"
+            });
+        }
+
+        const user = await userModel.findOne({ email });
+        user.resetPass = true;
+        await user.save();
+
+        if (!user) {
+            return res.status(401).json({
+                message: "User not found by this email!"
+            });
+        }
+
+        const otp = generateOtp();
+        const html = getOtpHtml(otp);
+
+        const otpHash = crypto.createHash("sha256").update(otp).digest("hex");
+
+        await otpModel.create({
+            email,
+            otpHash,
+            user: user._id
+        });
+
+        await sendEmail(email, "Verify your NotesApp email", `Your NotesApp verification code is ${otp}`, html)
+
+        return res.status(200).json({
+            message: "OTP has sent on your email.",
+            user: {
+                id: user._id,
+                username: user.username,
+                resetPass: user.resetPass
+            }
+        });
+    } catch (err) {
+        console.log("Sending forgot email otp: ", err);
+        return res.status(500).json({
+            message: "Something went wrong email not send!"
+        });
+    }
+}
+
+/**
+ * @route /api/auth/reset-password
+ * @description reset password using otp and new password.
+ * @access Public
+ */
+
+const newPasswordController = async (req, res) => {
+    const { newPassword } = req.body;
+    const { email } = req.params;
+
+    if (!newPassword) {
+        return res.status(400).json({
+            message: "Enter new password!"
+        });
+    }
+
+    try {
+        const user = await userModel.findOne({ email });
+        if (!user) {
+            return res.status(404).json({
+                message: "User not found with this email!"
+            });
+        }
+
+        const hashPass = await bcrypt.hash(newPassword, 10);
+        user.password = hashPass;
+        await user.save();
+
+        return res.status(200).json({
+            message: "Password changed successfully!"
+        });
+    }
+    catch (err) {
+        console.log(err);
+        return res.status(500).json({
+            message: "Internal server error"
+        });
+    }
+
+}
+
 module.exports = {
     userRegisterController,
     userLoginController,
     verifyEmailController,
     refreshAccessTokenController,
     getMeController,
-    logoutController
+    logoutController,
+    forgotPasswordController,
+    newPasswordController
 }

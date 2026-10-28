@@ -7,35 +7,22 @@ export const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
-    const [error,setError] = useState(null);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
-
-        let isMounted = true;
         const restore = async () => {
             try {
                 const data = await restoreSession();
-                if (isMounted) {
-                    setUser(data.user);
-                    setError(null);
-                }
-            } catch (err){
-                 if (isMounted) {
-                    setUser(null);
-                    setError(null);
-                }
+                setUser(data.user);
+            } catch (err) {
+                setUser(null);
+                console.log(err)
             } finally {
-                if (isMounted) {
-                    setLoading(false);
-                }
+                setLoading(false);
             }
         };
 
         restore();
-
-        return () => {
-            isMounted = false;
-        };
     }, []);
 
 

@@ -8,7 +8,7 @@ const api = axios.create({
 
 const refreshApi = axios.create({
     // baseURL: "https://mern-practice-app-mf0a.onrender.com",
-    baseURL: 'hhtp://localhost:3000',
+    baseURL: 'http://localhost:3000',
     withCredentials: true
 });
 
@@ -38,7 +38,7 @@ api.interceptors.response.use(
     async (error) => {
         const originalRequest = error.config;
 
-         const isAuthRequest =
+        const isAuthRequest =
             originalRequest?.url?.includes("/api/auth/login") ||
             originalRequest?.url?.includes("/api/auth/register") ||
             originalRequest?.url?.includes("/api/auth/refresh");
@@ -69,9 +69,9 @@ api.interceptors.response.use(
     }
 );
 
-export async function register({ username, email, password}){
+export async function register({ username, email, password }) {
     const response = await api.post("/api/auth/register", {
-        username, 
+        username,
         email,
         password
     });
@@ -80,7 +80,7 @@ export async function register({ username, email, password}){
     return response.data;
 }
 
-export async function login({email, password}){
+export async function login({ email, password }) {
     const response = await api.post("/api/auth/login", {
         email,
         password
@@ -90,19 +90,29 @@ export async function login({email, password}){
     return response.data;
 }
 
-export async function logout(){
-    const response =  await api.get("/api/auth/logout");
+export async function logout() {
+    const response = await api.get("/api/auth/logout");
     setAccessToken(null);
     return response;
 }
 
-export async function getMe(){
+export async function getMe() {
     const response = await api.get("/api/auth/get-me");
-    return response;
+    return response.data;
 }
 
-export async function verifyEmail({otp}){
-    const response = await api.post("/api/auth/verify-email", {otp});
+export async function verifyEmail({ otp }) {
+    const response = await api.post("/api/auth/verify-email", { otp });
+    return response.data;
+}
+
+export async function forgotPassword({ email }) {
+    const responce = await api.post("/api/auth/forgot-password", { email });
+    return responce.data;
+}
+
+export async function resetPassword({ email, newPassword }) {
+    const response = await api.post(`/api/auth/reset-password/${email}`, { newPassword });
     return response.data;
 }
 
