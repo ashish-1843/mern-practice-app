@@ -1,14 +1,14 @@
 import axios from 'axios';
 
 const api = axios.create({
-    // baseURL: 'https://mern-practice-app-mf0a.onrender.com',
-    baseURL: 'http://localhost:3000',
+    baseURL: 'https://mern-practice-app-mf0a.onrender.com',
+    // baseURL: 'http://localhost:3000',
     withCredentials: true
 });
 
 const refreshApi = axios.create({
-    // baseURL: "https://mern-practice-app-mf0a.onrender.com",
-    baseURL: 'http://localhost:3000',
+    baseURL: "https://mern-practice-app-mf0a.onrender.com",
+    // baseURL: 'http://localhost:3000',
     withCredentials: true
 });
 
