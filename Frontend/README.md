@@ -1,11 +1,11 @@
 # Frontend
 
-A React 19 single-page application built with Vite. It provides registration, email verification, login, a protected dashboard, and note creation. The frontend uses React Router, Axios, Tailwind CSS, and shared UI components.
+A React 19 single-page application built with Vite. It provides registration, email verification, login, a protected dashboard, and note management. The frontend uses React Router, Axios, Tailwind CSS, and shared UI components.
 
 ## Requirements
 
-- Node.js and npm (use a Node.js release supported by the installed Vite version)
-- The API backend; see [the backend README](../Backend/README.md)
+- Node.js and npm
+- The API backend; see the [backend README](../Backend/README.md)
 
 ## Setup and development
 
@@ -35,8 +35,10 @@ Open the Vite URL shown in the terminal (normally `http://localhost:5173`).
 | `/login` | Login | Public |
 | `/register` | Create an account | Public |
 | `/verify-email` | Enter the email verification code | Public |
+| `/forgot-password` | Request a password-reset code | Public |
 | `/dashboard` | Dashboard | Requires authentication |
-| `/create-note` | Create a note | Requires authentication |
+| `/create-note` | Create, search, update, and delete notes | Requires authentication |
+| `/reset-password` | Set a new password | Requires authentication |
 
 Authentication state is managed by the auth context. The app stores the access token in `localStorage`, sends it as a bearer token, and uses a credentialed refresh request to restore a session from the refresh-token cookie.
 
@@ -47,7 +49,7 @@ Both API clients currently use the deployed API URL `https://mern-practice-app-m
 - `src/features/auth/services/auth.api.js`
 - `src/features/Dashboard/services/notes.api.js`
 
-For local development, change each client's `baseURL` to the backend URL (normally `http://localhost:3000`) and configure the backend CORS origin in `Backend/src/app.js` to match the frontend origin (normally `http://localhost:5173`). The backend requires the environment variables described in [its README](../Backend/README.md).
+For local development, set each client's `baseURL` to the backend URL (normally `http://localhost:3000`). The backend CORS allowlist already includes `http://localhost:5173`; if you use a different frontend origin, update it in `Backend/src/app.js`. Configure the backend environment variables described in the [backend README](../Backend/README.md).
 
 ## Source layout
 
